@@ -31,7 +31,9 @@ BrnoJUG 2025
 
 ### Slides and examples
 
-<span class="demo" style="font-size:1.1em;">👀</span> TODO 
+![GitHub repo link](deck-assets/qr.png)
+
+<span class="demo" style="font-size:1.1em;">👀</span> https://github.com/mkouba/brnojug2025 
 
 ---
 
@@ -42,7 +44,7 @@ BrnoJUG 2025
 
 ### MCP - TL;DR
 
-[~] <span class="high-importance">Standardization</span> effort for integration of **AI-infused applications** (clients) and **external** tools, prompts and resources (servers).
+[~] <span class="high-importance">Standardization effort</span> for integration of **AI-infused applications** (clients) and **external tools, prompts and resources** (servers).
 
 ---
 
@@ -78,7 +80,7 @@ BrnoJUG 2025
 - [~] JSON-RPC 2.0 messages
 - [~] Transport - how messages are sent and received
 - [~] Server features: tools, prompts, resources
-- [~] Client features: sampling, roots, elicitation
+- [~] [Client features](https://modelcontextprotocol.io/clients): sampling, roots, elicitation
 
 ---
 
