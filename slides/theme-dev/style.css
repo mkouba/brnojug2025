@@ -32,6 +32,10 @@
    font-size: 0.8em;
 }
 
+.reveal ul li {
+   line-height: 1.5em;
+}
+
 .reveal-viewport {
    background-image: url(assets/img/quarkus_rocks.png);
    background-repeat: no-repeat;

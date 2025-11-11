@@ -20,11 +20,8 @@ public class LongRunningTools {
         if (progress.token().isEmpty()) {
             return Uni.createFrom().item("Client does not support progress notifications!");
         }
-        ProgressTracker tracker = progress.trackerBuilder()
-                .setDefaultStep(1)
-                .setTotal(10)
-                .setMessageBuilder(i -> "Long running progress: " + i)
-                .build();
+        ProgressTracker tracker = progress.trackerBuilder().setDefaultStep(1).setTotal(10)
+                .setMessageBuilder(i -> "Long running progress: " + i).build();
 
         CompletableFuture<String> ret = new CompletableFuture<String>();
         executor.execute(() -> {

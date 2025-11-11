@@ -16,16 +16,18 @@ BrnoJUG 2025
 
 - Introvert and fan of open source
 - Software engineer at IBM
-- Quarkus core contributor and MCP server maintainer
+- Quarkus core contributor 
+- Quarkus MCP server maintainer
 
 ---
 
 ### What's the plan for today?
 
 - [~] Oh no, MCP again?
-- [~] Quarkus MCP server: history, goals & design
-- [~] What does the API look like?
-- [~] Advanced features & developer joy
+- [~] Quarkus MCP server:
+  - [~] History, goals & design
+  - [~] What does the API look like?
+  - [~] Advanced features & developer joy
 
 ---
 
@@ -40,17 +42,29 @@ BrnoJUG 2025
 
 ### Part 1 - MCP
 
+https://modelcontextprotocol.io
+
 ---
 
 ### MCP - TL;DR
 
-[~] <span class="high-importance">Standardization effort</span> for integration of **AI-infused applications** (clients) and **external tools, prompts and resources** (servers).
+- [~] _"MCP is an open standard for connecting AI agents to external systems."_
+- [~] AI agent = AI-infused application = MCP client
+- [~] External system = MCP server
+- [~] Standardization effort for integration of **AI-infused applications** and **external tools, prompts and resources**.
 
 ---
 
 ### MCP - Big picture
 
 ![MCP servers big picture](deck-assets/mcp-servers.svg)
+
+---
+
+### MCP - A better picture
+
+![MCP tools](https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2F9ecf165020005c09a22a9472cee6309555485619-1920x1080.png&w=1920&q=75)
+Source: https://www.anthropic.com/engineering/code-execution-with-mcp
 
 ---
 
@@ -382,6 +396,36 @@ public class SamplingCheck implements InitialCheck {
 
 ---
 
+### Sampling <span class="demo">👀</span>
+
+```java[1: 1-23|6|10-17]
+import io.quarkiverse.mcp.server.Sampling;
+
+public class Tools {
+
+    @Tool(description = "Returns a random fantasy monster with description.")
+    Uni<MonsterAndDescription> randomMonster(Sampling sampling) {
+        if (sampling.isSupported()) {
+            return Panache.withSession(() -> Monster.<Monster> listAll())
+            .chain(all -> {
+                int index = ThreadLocalRandom.current().nextInt(all.size());
+                Monster monster = all.get(index);
+                SamplingRequest samplingRequest = sampling.requestBuilder()
+                        .setMaxTokens(100)
+                        .addMessage(SamplingMessage.withUserRole("Give me a description of " + monster.name))
+                        .build();
+                return samplingRequest.send()
+                        .map(response -> new MonsterAndDescription(monster, response.content().asText().text()));
+            });
+        } else {
+            throw new ToolCallException("Sampling not supported");
+        }
+    }
+}
+```
+
+---
+
 ### Progress API <span class="demo">👀</span>
 
 ```java[1: 1-34|8-12|13-17|28|30-31]
@@ -424,33 +468,7 @@ public class LongRunningTools {
 
 ---
 
-### Sampling <span class="demo">👀</span>
 
-```java[1: 1-17|6|7-16|18]
-import io.quarkiverse.mcp.server.Sampling;
-
-public class Tools {
-
-    @Tool(description = "Just test the sampling feature")
-    Uni<String> justTestSampling(Sampling sampling, String topic) {
-        if (sampling.isSupported()) {
-            SamplingRequest samplingRequest = sampling.requestBuilder()
-                    .setMaxTokens(100)
-                    .addMessage(
-                       SamplingMessage.withUserRole(
-                          "Tell me more about " + topic))
-                    .build();
-            return samplingRequest
-               .send()
-               .map(response -> response.content().asText().text());
-        } else {
-           throw new ToolCallException("Sampling not supported");
-        }
-    }
-}
-```
-
----
 
 ### And that's all!
 
