@@ -12,7 +12,7 @@
    font-family: "Sriracha", "Open Sans", Arial, sans-serif;
    font-weight: bold;
    /*font-style: italic;*/
-   text-transform: none;
+   text-transform: uppercase;
 }
 
 .reveal code {

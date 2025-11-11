@@ -115,8 +115,8 @@ BrnoJUG 2025
 
 ### Goals
 
-1. [~] Unified declarative and programmatic API to implement MCP server features independent of the selected transport
-2. [~] Quarkus-idiomatic & convenient UX
+- [~] Unified declarative and programmatic API to implement MCP server features independent of the selected transport
+- [~] Quarkus-idiomatic & convenient UX
 
 ---
 
