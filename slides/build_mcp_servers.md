@@ -123,7 +123,7 @@ Source: https://www.anthropic.com/engineering/code-execution-with-mcp
 - [~] Quarkus extension that lives in Quarkiverse
 - [~] [1.0.0.Alpha1](https://github.com/quarkiverse/quarkus-mcp-server/releases/tag/1.0.0.Alpha1) released in December 2024
 - [~] [1.0.0](https://github.com/quarkiverse/quarkus-mcp-server/releases/tag/1.0.0) released in April 2025
-- [~] Latest version [1.7.1](https://github.com/quarkiverse/quarkus-mcp-server/releases/tag/1.7.1), released ~ two weeks ago
+- [~] Latest version [1.7.2](https://github.com/quarkiverse/quarkus-mcp-server/releases/tag/1.7.2), released yesterday ;-)
 
 ---
 

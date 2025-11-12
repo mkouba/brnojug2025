@@ -53,8 +53,7 @@ public class Tools {
                 int index = ThreadLocalRandom.current().nextInt(all.size());
                 Monster monster = all.get(index);
                 SamplingRequest samplingRequest = sampling.requestBuilder().setMaxTokens(100)
-                        .addMessage(SamplingMessage.withUserRole("Give me a description of " + monster.name))
-                        .build();
+                        .addMessage(SamplingMessage.withUserRole("Give me a description of " + monster.name)).build();
                 return samplingRequest.send()
                         .map(response -> new MonsterAndDescription(monster, response.content().asText().text()));
             });
